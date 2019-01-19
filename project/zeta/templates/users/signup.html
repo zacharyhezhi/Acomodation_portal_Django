@@ -1,0 +1,56 @@
+<!-- templates/users/signup.html -->
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block navigation %}{% endblock %}
+
+{% block content %}
+<style>
+		.button_part{
+			border-radius: 20px;
+			height: 50px;
+			width: 150px;
+			background-color: #388af5;
+			color: #FFFFFF;
+			font-size: 20px;
+			margin-top: 150px;
+			
+	
+		}
+		.colour h1{color: #CECECE;}
+		.colour h2{color: #CECECE;}
+		.colour h3{color: #CECECE;}
+		.colour h4{color: #CECECE;}
+		.bg {
+				background-image: url('/static/images/bg-01.jpg');
+				width:100%;
+		}
+		.whole{
+				font-family: "Open Sans", sans-serif;
+				font-size: 20px !important;
+				margin-top:10%;
+				margin-left:100px;
+				display: inline-block;
+				padding-left:100px;
+				padding-top:5px;
+				color: #CECECE;
+				padding-bottom:200px;
+				display: inline-block;
+			}
+</style>
+<div class="bg">
+	<div class= "whole">
+		<div class="colour">
+		<h2>Sign up</h2>
+		<form method="post">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<button type="submit" class="btn btn-success btn-large">Sign up</button><br>
+			<br>
+			Already have a Zeta account? <a class="btn btn-success btn-large" href="{% url 'login' %}">Log in</a>
+		</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,96 @@
+<!-- templates/advertising/step3-01-guest-requirements.html -->
+{% extends 'base.html' %}
+
+{% block title %}Step 3: Get ready for guests{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+
+
+{% block content %}
+<style>
+	.whole{
+			top: 25%;
+			left: 5%;
+			font-family: "Open Sans", sans-serif;
+			font-size: 15px !important;
+			margin-top: 150px;
+			/* text-align: left; */
+			padding-left:100px;
+			padding-top:5px;
+			color: #CECECE;
+			padding-bottom:200px;
+			display: inline-block;
+		}
+	
+		.button_part button{
+			border-radius: 20px;
+			height: 50px;
+			width: 100px;
+			background-color: #388af5;
+			color: #FFFFFF;
+			font-size: 20px;
+			margin-top: 40px;
+		}
+		.colour h3{color: #CECECE;}
+		.colour h4{color: #CECECE;}
+		.colour h1{color: #CECECE;}
+		.colour h2{color: #CECECE;}
+		.bg{
+			background-image: url('/static/images/bg-01.jpg');
+			width:100%;
+		}
+	.button_part button{
+		border-radius: 20px;
+		height: 50px;
+		width: 100px;
+		background-color: #343a40;
+		color: #FFFFFF;
+		font-size: 20px;
+		margin-top: 40px;
+		cursor: pointer;
+	}
+</style>
+<div class="bg">
+<div class="whole">
+	<form action="{% url 'advertising:controller' %}" method="post">
+		{% csrf_token %}
+		
+		<input type="hidden" name="stage" value="3-01"/>
+		<div class="colour">
+		<h1>Step 3: Get ready for guests</h1>
+		<h2>Review Zeta's guests requirements</h2>
+		<h3>All Zeta guests must provide:</h3>
+		&#9989; Email address<br>
+		&#9989; Confirmed phone number<br>
+		&#9989; Payment information
+	<h3>Before booking your home, each guest must:</h3>
+		&#9989; Agree to your House Rules<br>
+		&#9989; Message you about their trip<br>
+		&#9989; Let you know how many guests are coming<br>
+		&#9989; Confirm their check-in time if they're arriving within 2 days<br>
+		<br>
+		
+	<h3>Add additional requirements</h3>
+		<input type="checkbox" name="requirements" value="Government-issued ID submitted to Zeta">Government-issued ID submitted to Zeta<br>
+		<input type="checkbox" name="requirements" value="Recommended by other hosts and have no negative reviews">Recommended by other hosts and have no negative reviews<br>
+	<h3>More requirements can mean fewer reservations.</h3>
+	
+		
+	<h3>Cancellation policy</h3>
+		<select name="cancellation_policy">
+			<option value="flexible">Flexible</option>
+			<option value="moderate">Moderate</option>
+			<option value="strict_14_with_grace_period">2 weeks</option>
+			<option value="super_strict_30">1 month</option>
+			<option value="super_strict_60">2 months</option>
+		</select>
+	</div>
+		<div class="button_part">
+			<button name="navigation" type="submit" value="back"class="btn btn-success btn-large">Back</button>
+			<button name="navigation" type="submit" value="next"class="btn btn-success btn-large">Next</button>
+		</div>
+	</form>
+</div>
+</div>
+{% endblock %}

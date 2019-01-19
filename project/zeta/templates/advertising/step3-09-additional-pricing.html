@@ -1,0 +1,84 @@
+<!-- templates/advertising/step3-09-additional-pricing.html -->
+{% extends 'base.html' %}
+
+{% block title %}Step 3: Get ready for guests{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+
+
+{% block content %}
+<style>
+	.whole{
+		display: inline-block;
+			top: 25%;
+			left: 5%;
+			font-family: "Open Sans", sans-serif;
+			font-size: 20px !important;
+			padding-left:100px;
+			padding-top:150px;
+			color: #CECECE;
+			padding-bottom:100px;
+	}
+	.bg{
+			background-image: url('/static/images/bg-01.jpg');
+			width:100%;
+		}
+		.colour h1{color: #CECECE;}
+		.colour h2{color: #CECECE;}
+		.colour h3{color: #CECECE;}
+		.colour h4{color: #CECECE;}
+
+	}
+	.button_part button{
+		border-radius: 20px;
+		height: 50px;
+		width: 100px;
+		background-color: #343a40;
+		color: #FFFFFF;
+		font-size: 20px;
+		margin-top: 40px;
+		cursor: pointer;
+	}
+</style>
+<div class="bg">
+<div class="whole">
+	<form action="{% url 'advertising:controller' %}" method="post">
+		{% csrf_token %}
+		
+		<input type="hidden" name="stage" value="3-09"/>
+		<div class="colour">
+		<h1>Step 3: Get ready for guests</h1>
+		<h2>Length-of-stay prices</h2>
+		<b>Encourage travellers to book longer stays by offering a discount.</b><br>
+		
+		
+		<b>Weekly discount</b><br>
+		<input type="text" name="weekly_discount"><br>
+		Tip: $21%
+		<br>
+		Travellers often search by price. To help increase your chances of getting weekly stays, try setting a discount.<br>
+	
+		
+		<b>Monthly discount</b><br>
+		<input type="text" name="monthly_discount"><br>
+		Tip: $49%<br>
+		Most travellers staying longer than one month book listings with discounts greater than 25%.<br>
+		<br>
+		
+		<h3>Additional prices</h3>
+		<b>Security deposit</b><br>
+		<input type="text" name="security_deposit" value="{{ request.session.security_deposit }}"><br>
+		<b>Cleaning fee</b><br>
+		<input type="text" name="cleaning_fee" value="{{ request.session.cleaning_fee }}"><br>
+		<b>Extra people</b><br>
+		<input type="text" name="extra_people" value="{{ request.session.extra_people }}"><br>
+	</div><br>
+		<div class="button_part">
+			<button name="navigation" type="submit" value="back"class="btn btn-success btn-large">Back</button>
+			<button name="navigation" type="submit" value="next"class="btn btn-success btn-large">Next</button>
+		</div>
+	</form>
+</div>
+</div>
+{% endblock %}

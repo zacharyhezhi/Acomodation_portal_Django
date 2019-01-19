@@ -1,0 +1,103 @@
+<!-- templates/advertising/become-a-host.html -->
+{% extends 'base.html' %}
+
+{% block title %}Become a Host{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+{% block content %}
+<style>
+	.button_part{
+		border-radius: 20px;
+		height: 50px;
+		width: 150px;
+		background-color: #388af5;
+		color: #FFFFFF;
+		font-size: 20px;
+		margin-top: 2%;
+		margin-left: 1%;
+		margin-right: 1%;
+	}
+	.whole{
+			top: 5%; 
+			left: 5%; 
+			font-family: "Open Sans", sans-serif;
+			font-size: 20px !important;
+			margin-top:10%;
+			
+			display: inline-block;
+			padding-left:100px;
+			padding-top:5px;
+			padding-bottom:400px;
+	}
+	.colour h1{color: #CECECE;}
+	.colour h2{color: #CECECE;}
+	.colour h3{color: #CECECE;}
+	.bg{
+			background-image: url('/static/images/bg-01.jpg');
+			width:100%;
+		}
+
+</style>
+
+<script>
+		function UnloginWarn() {
+			alert("Please log in before saving!");
+		}
+</script>	
+
+
+{% if messages %}
+<ul class="messages">
+	{% for message in messages %}
+	<script>
+			UnloginWarn();
+	</script> 
+		<!-- <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li> -->
+	{% endfor %}
+</ul>
+{% endif %}
+
+
+
+<div class="bg">
+<div class= "whole">
+	<form action="{% url 'advertising:controller' %}" method="post">
+		{% csrf_token %}
+		<div class="colour">
+		<h2>Step 1: Start with the basics</h2>
+		<h3>Beds, bathrooms, amenities, and more</h3>
+		</div>
+		<!-- <button class = "button_part"> -->
+		<a class="btn btn-success btn-large" href="{% url 'advertising:1-01' %}">Change</a><br>
+		<!-- </button><br> -->
+		<br>
+		<div class="colour">
+		<h2>Step 2: Set the scene<h2>
+		<h3>Photos, short description, title</h3>
+		</div>
+		<!-- <button class="button_part"> -->
+			<a class="btn btn-success btn-large" href="{% url 'advertising:2-01' %}" >Change</a><br>
+		<!-- </button><br> -->
+		<br>
+		<div class="colour">
+		<h2>Step 3: Get ready for guests</h2>
+		<h3>Booking settings, calendar, price</h3>
+		</div>
+		<!-- <button class="button_part"> -->
+			<a class="btn btn-success btn-large" href="{% url 'advertising:3-01' %}">Change</a><br>
+		<!-- </button><br> -->
+		<br>
+		<div class="colour">
+		<h3>You can choose to save or clean the data here</h3>
+		</div>
+		<button class="btn btn-success btn-large" name="navigation" type="submit" value="clean">Clean</button>
+		<button class="btn btn-success btn-large" name="navigation" type="submit" value="save">Save</button>
+	</form>
+</div>
+</div>
+{% endblock %}
+
+
+
+

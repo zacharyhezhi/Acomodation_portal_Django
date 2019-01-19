@@ -1,0 +1,103 @@
+<!-- templates/advertising/step3-02-house-rules.html -->
+{% extends 'base.html' %}
+
+{% block title %}Step 3: Get ready for guests{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+
+{% block content %}
+<style>
+	.whole{
+			top: 25%;
+			left: 5%;
+			font-family: "Open Sans", sans-serif;
+			font-size: 15px !important;
+			margin-top: 150px;
+			/* text-align: left; */
+			padding-left:100px;
+			padding-top:5px;
+			color: #CECECE;
+			padding-bottom:200px;
+			display: inline-block;
+		}
+	
+		.button_part button{
+			border-radius: 20px;
+			height: 50px;
+			width: 100px;
+			background-color: #388af5;
+			color: #FFFFFF;
+			font-size: 20px;
+			margin-top: 40px;
+		}
+		.colour h3{color: #CECECE;}
+		.colour h4{color: #CECECE;}
+		.colour h1{color: #CECECE;}
+		.colour h2{color: #CECECE;}
+		.bg{
+			background-image: url('/static/images/bg-01.jpg');
+			width:100%;
+		}
+	
+	.button_part button{
+		border-radius: 20px;
+		height: 50px;
+		width: 100px;
+		background-color: #343a40;
+		color: #FFFFFF;
+		font-size: 20px;
+		margin-top: 40px;
+		cursor: pointer;
+	}
+</style>
+<div class="bg">
+<div class="whole">
+	<form action="{% url 'advertising:controller' %}" method="post">
+		{% csrf_token %}
+		
+		<input type="hidden" name="stage" value="3-02"/>
+		<div class="colour">
+		<h1>Step 3: Get ready for guests</h1>
+		<h2>Set house rules for your guests</h2>
+		Suitable for infants (Under 2 years)
+		<input type="radio" name="infants" value="Not suitable for infants (Under 2 years)" checked>No
+		<input type="radio" name="infants" value="Suitable for infants (Under 2 years)">Yes<br>
+		Suitable for children (2-12years)
+		<input type="radio" name="children" value="Not suitable for children (2-12years)" checked>No
+		<input type="radio" name="children" value="Suitable for children (2-12years)">Yes<br>
+		Suitable for pets
+		<input type="radio" name="pets" value="Not suitable for pets" checked>No
+		<input type="radio" name="pets" value="Suitable for pets">Yes<br>
+		Smoking allowed
+		<input type="radio" name="smoking" value="Smoking is not allowed" checked>No
+		<input type="radio" name="smoking" value="Smoking allowed">Yes<br>
+		Events or parties allowed
+		<input type="radio" name="events" value="Events or parties are not allowed" checked>No
+		<input type="radio" name="events" value="Events or parties allowed">Yes<br>
+		<br>
+		<!--
+		<b>Additional rules</b><br>
+		<input type="text" name="rules" value="Quiet hours? No shoes in the house?">
+		<button name="add" type="Add" value="add">Add</button><br>
+		<br>
+		-->
+		<h3>Details guests must know about your home</h3>
+		<input type="checkbox" name="additional_rules" value="Must climb stairs">Must climb stairs<br>
+		<input type="checkbox" name="additional_rules" value="Potential for noise">Potential for noise<br>
+		<input type="checkbox" name="additional_rules" value="Pet(s) live on property">Pet(s) live on property<br>
+		<input type="checkbox" name="additional_rules" value="No parking on property">No parking on property<br>
+		<input type="checkbox" name="additional_rules" value="Some space are shared">Some space are shared<br>
+		<input type="checkbox" name="additional_rules" value="Amenity limitations">Amenity limitations<br>
+		<input type="checkbox" name="additional_rules" value="Surveillance or recording devices on property">Surveillance or recording devices on property<br>
+		<input type="checkbox" name="additional_rules" value="Weapons on property">Weapons on property<br>
+		<input type="checkbox" name="additional_rules" value="Dangerous animals on propert">Dangerous animals on propert<br>
+	</div>
+		<div class="button_part">
+		<button name="navigation" type="submit" value="back"class="btn btn-success btn-large">Back</button>
+		<button name="navigation" type="submit" value="next"class="btn btn-success btn-large">Next</button>
+	</div>
+	</form>
+</div>
+</div>
+{% endblock %}

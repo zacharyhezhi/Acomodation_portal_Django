@@ -1,0 +1,78 @@
+<!-- templates/advertising/manage-requests.html -->
+{% extends 'base.html' %}
+
+{% block title %}Manage Requests{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+{% block header %}
+<div style="margin-top:10%; text-align:center;">
+	<b>Manage Requests</b>
+</div>
+{% endblock %}
+
+{% block content %}
+<style>
+	table {
+		font-family: arial, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+	}
+	
+	.colour h1{color: #CECECE;}
+	
+	.colour h2{color: #CECECE;}
+	
+	.colour h3{color: #CECECE;}
+	
+	.colour h4{color: #CECECE;}
+	
+	.bg{
+		background-image: url('/static/images/bg-01.jpg');
+		width:100%;
+	}
+	
+	td, th {
+		border: 1px solid #dddddd;
+		text-align: left;
+		padding: 8px;
+	}
+	
+	.whole{
+		position: absolute;
+		margin-top: 5%;
+		left: 10%;
+		font-family: "Open Sans", sans-serif;
+		font-size: 24px !important;
+	}
+	
+	.button_part button{
+		border-radius: 20px;
+		height: 50px;
+		width: 100px;
+		background-color: #343a40;
+		color: #FFFFFF;
+		font-size: 20px;
+		margin-top: 40px;
+		cursor: pointer;
+	}
+</style>
+
+<div class = "whole">
+	<form action="{% url 'request:controller' %}" method="post">
+		{% csrf_token %}
+		
+		<table>
+		{% for request in requests %}
+			<tr><td>
+			<a class="btn btn-success btn-large" href="{% url 'request:request-details' request_id=request.id %}" style="color:blue" target="_blank"><b>{{ request.title }}</b></a> | 
+			{{ request.check_in }} | 
+			{{ request.check_out }} | 
+			<a class="btn btn-success btn-large" href="{% url 'request:delete-request' request_id=request.id %}" style="color:red" class="btn btn-success btn-large"><b>Delete</b></a> | 
+			<a class="btn btn-success btn-large" href="{% url 'request:edit-request' request_id=request.id %}" style="color:red" target="_blank" class="btn btn-success btn-large"><b>Edit</b></a>
+			</tr></td>
+		{% endfor %}
+		</table>
+	</form>
+</div>
+{% endblock %}

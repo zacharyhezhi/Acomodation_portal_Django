@@ -1,0 +1,76 @@
+<!-- templates/search/request-details.html -->
+{% extends 'base.html' %}
+
+{% block title %}{{ request.title }}{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+{% block header %}
+<div style="margin-top:10%; text-align:center;">
+	<b>{{ request.title }}</b>
+</div>
+{% endblock %}
+
+{% block content %}
+<style>
+	.main-wrap {
+		overflow: hidden;
+	}
+	
+	.left-body {
+		float: left;
+		width: 50%;
+	}
+	
+	.right-body {
+		float: right;
+		width: 50%;
+	}
+	.colour span {
+			color: #CECECE;
+			margin-left: 10px;
+			margin-top: 8px;
+		}
+</style>
+
+<form action="{% url 'request:controller' %}" method="post">
+	{% csrf_token %}
+	
+	<input type="hidden" name="request_id" value="{{ request.id }}"/>
+	
+	<div class="main-wrap">
+		<div class="left-body">
+			{{ request.neighbourhood }}<br>
+			{{ request.city }}<br>
+			{{ request.state }}<br>
+			{{ request.property_type }}<br>
+			{{ request.room_type }}<br>
+			{{ request.accommodates }} guest(s)<br>
+			{{ request.bedrooms }} bedroom(s)<br>
+			{{ request.beds }} bed(s)<br>
+			{{ request.bed_type }}<br>
+			{{ request.bathrooms }} bath(s)<br>
+			{{ request.check_in }} - {{ request.check_out }}<br>
+			{{ request.min_price }} - {{ request.max_price }}<br>
+			{% if request.visitor_id == user.id %}
+				<a href="{% url 'request:edit-request' request_id=request.id %}" style="color:red">Edit</a>
+			{% else %}
+				<a href="" style="color:red">Make an Offer</a>
+			{% endif %}
+		</div>
+		
+		<div class="right-body">
+			<span>Description:</span><br>
+			{{ request.description }}<br>
+			<br>
+			
+			<span>Amenities:</span><br>
+			{{ request.amenities }}<br>
+			<br>
+			
+			<span>Access:</span><br>
+			{{ request.access }}
+		</div>
+	</div>
+</form>
+{% endblock %}

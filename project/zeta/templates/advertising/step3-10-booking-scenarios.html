@@ -1,0 +1,76 @@
+<!-- templates/advertising/step3-10-booking-scenarios.html -->
+{% extends 'base.html' %}
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+{% block title %}Step 3: Get ready for guests{% endblock %}
+
+
+
+{% block content %}
+<style>
+	.whole{
+		display: inline-block;
+			top: 25%;
+			left: 5%;
+			font-family: "Open Sans", sans-serif;
+			font-size: 20px !important;
+			padding-left:100px;
+			padding-top:150px;
+			color: #CECECE;
+			padding-bottom:100px;
+	}
+	.bg{
+			background-image: url('/static/images/bg-01.jpg');
+			width:100%;
+		}
+		.colour h1{color: #CECECE;}
+		.colour h2{color: #CECECE;}
+		.colour h3{color: #CECECE;}
+		.colour h4{color: #CECECE;}
+
+	}
+	
+	.button_part button{
+		border-radius: 20px;
+		height: 50px;
+		width: 100px;
+		background-color: #343a40;
+		color: #FFFFFF;
+		font-size: 20px;
+		margin-top: 40px;
+		cursor: pointer;
+	}
+</style>
+<div class="bg">
+<div class="whole">
+	<form action="{% url 'advertising:controller' %}" method="post">
+		{% csrf_token %}
+		<div class="colour">
+		<h1>Step 3: Get ready for guests</h1>
+		<input type="hidden" name="stage" value="3-10"/>
+		
+		<h2>Based on your settings, here’s what you could expect</h2>
+		<b>Unfortunately, she can’t book your place because your calendar is blocked.</b><br>
+		Lou is planning her trip and thinks your listing is perfect.<br>
+		<br>
+		
+		<b>Guests who meet Zeta requirements can instantly book.</b><br>
+		In addition to meeting guest requirements, Lou agrees to your House Rules.<br>
+		<br>
+		
+		<b>Guests send a message with their booking confirmation.</b><br>
+		Lou says she’ll be in town for work and she’d love to stay with you.<br>
+		<br>
+		
+		<b>Welcome guests to your space!</b><br>
+		Before Lou arrives, coordinate details like check-in time and key exchange.<br>
+		<br>
+	</div>
+		<div class="button_part">
+			<button name="navigation" type="submit" value="back" class="btn btn-success btn-large">Back</button>
+			<button name="navigation" type="submit" value="next" class="btn btn-success btn-large">Next</button>
+		</div>
+	</form>
+</div>
+</div>
+{% endblock %}

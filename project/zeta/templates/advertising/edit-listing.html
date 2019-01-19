@@ -1,0 +1,49 @@
+<!-- templates/advertising/edit-listing.html -->
+{% extends 'base.html' %}
+
+{% block title %}Edit Listing{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+{% block content %}
+<style>
+	.whole{
+		top: 5%; 
+		left: 5%; 
+		font-family: "Open Sans", sans-serif;
+		font-size: 20px !important;
+		color: #CECECE;
+		margin-top:10%;
+		display: inline-block;
+		padding-left:100px;
+		padding-top:5px;
+		padding-bottom:400px;
+	}
+	.colour h2{color: #CECECE;}
+	.bg{
+			background-image: url('/static/images/bg-01.jpg');
+			width:100%;
+	}
+</style>
+
+<div class="bg">
+	<div class= "whole">
+	<div class="colour">
+	<h2>Edit Listing</h2>
+	</div>
+	<form method="post">
+		{% csrf_token %}
+		<!-- {{ form.as_p }} -->
+		<table>
+			{% for item in form %}
+			<tr>
+				<td>{{ item.label }}</td>
+				<td>{{item}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+		<button class="btn btn-success btn-large" type="submit">Update</button><br>
+	</form>
+</div>
+</div>	
+{% endblock %}

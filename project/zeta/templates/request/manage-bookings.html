@@ -1,0 +1,152 @@
+<!-- templates/request/manage-bookings.html -->
+{% extends 'base.html' %}
+
+{% block title %}Manage Bookings{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+{% block header %}
+<div style="margin-top:10%; text-align:center;">
+	<b>Manage Bookings</b>
+</div>
+{% endblock %}
+
+{% block content %}
+<style>
+	table {
+		font-family: arial, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+	}
+	
+	td, th {
+		border: 1px solid #dddddd;
+		text-align: left;
+		padding: 8px;
+	}
+	
+	.whole{
+		position: absolute;
+		margin-top: 5%;
+		left: 10%;
+		font-family: "Open Sans", sans-serif;
+		font-size: 24px !important;
+	}
+	
+	.button_part button{
+		border-radius: 20px;
+		height: 50px;
+		width: 100px;
+		background-color: #343a40;
+		color: #FFFFFF;
+		font-size: 20px;
+		margin-top: 40px;
+		cursor: pointer;
+	}
+	
+	.colour span {
+		color: #CECECE;
+		margin-left: 10px;
+		margin-top: 8px;
+	}
+</style>
+
+<div class = "whole">
+	<form action="{% url 'request:controller' %}" method="post">
+		{% csrf_token %}
+		
+		<div class="colour">
+			{% if user.is_provider %}
+				<h3>Booking Enquiries</h3>
+				<table>
+					{% for booking in pending_enquiries %}
+						<tr><td>
+							<a class="btn btn-success btn-large" href="{% url 'users:profile' user_id=booking.visitor_id %}" style="color:green" target="_blank"><b>{{ booking.visitor.first_name }} {{ booking.visitor.last_name }}</b></a> | 
+							<a class="btn btn-success btn-large" href="{% url 'advertising:listing-details' listing_id=booking.listing_id %}" style="color:blue" target="_blank"><b>{{ booking.listing.title }}</b></a> | 
+							<span>Check in:</span> {{ booking.check_in }} | 
+							<span>Check out:</span> {{ booking.check_out }} | 
+							<span>Pending</span> | 
+							<a class="btn btn-success btn-large" href="{% url 'request:accept-booking' booking_id=booking.id %}" style="color:red"><b>Accept</b></a> | 
+							<a class="btn btn-success btn-large" href="{% url 'request:decline-booking' booking_id=booking.id %}" style="color:red"><b>Decline</b></a>
+						</tr></td>
+					{% endfor %}
+				</table><br>
+				
+				<table>
+					{% for booking in accepted_enquiries %}
+						<tr><td>
+							<a class="btn btn-success btn-large" href="{% url 'users:profile' user_id=booking.visitor_id %}" style="color:green" target="_blank"><b>{{ booking.visitor.first_name }} {{ booking.visitor.last_name }}</b></a> | 
+							<a class="btn btn-success btn-large" href="{% url 'advertising:listing-details' listing_id=booking.listing_id %}" style="color:blue" target="_blank"><b>{{ booking.listing.title }}</b></a> | 
+							<span>Check in:</span> {{ booking.check_in }} | 
+							<span>Check out:</span> {{ booking.check_out }} | 
+							<span>Accepted</span> | 
+							<a class="btn btn-success btn-large" href="{% url 'request:cancel-booking' booking_id=booking.id as_provider=1 %}" style="color:red"><b>Cancel</b></a>
+						</tr></td>
+					{% endfor %}
+					{% for booking in declined_enquiries %}
+						<tr><td>
+							<a class="btn btn-success btn-large" href="{% url 'users:profile' user_id=booking.visitor_id %}" style="color:green" target="_blank"><b>{{ booking.visitor.first_name }} {{ booking.visitor.last_name }}</b></a> | 
+							<a class="btn btn-success btn-large" href="{% url 'advertising:listing-details' listing_id=booking.listing_id %}" style="color:blue" target="_blank"><b>{{ booking.listing.title }}</b></a> | 
+							<span>Check in:</span> {{ booking.check_in }} | 
+							<span>Check out:</span> {{ booking.check_out }} | 
+							<span>Declined</span>
+						</tr></td>
+					{% endfor %}
+					{% for booking in canceled_enquiries %}
+						<tr><td>
+							<a class="btn btn-success btn-large" href="{% url 'users:profile' user_id=booking.visitor_id %}" style="color:green" target="_blank"><b>{{ booking.visitor.first_name }} {{ booking.visitor.last_name }}</b></a> | 
+							<a class="btn btn-success btn-large" href="{% url 'advertising:listing-details' listing_id=booking.listing_id %}" style="color:blue" target="_blank"><b>{{ booking.listing.title }}</b></a> | 
+							<span>Check in:</span> {{ booking.check_in }} | 
+							<span>Check out:</span> {{ booking.check_out }} | 
+							<span>Canceled</span>
+						</tr></td>
+					{% endfor %}
+				</table>
+			{% endif %}
+			
+			{% if user.is_visitor %}
+				<h3>Your Bookings</h3>
+				<table>
+					{% for booking in pending_bookings %}
+						<tr><td>
+							<a class="btn btn-success btn-large" href="{% url 'advertising:listing-details' listing_id=booking.listing_id %}" style="color:blue" target="_blank"><b>{{ booking.listing.title }}</b></a> | 
+							<span>Check in:</span> {{ booking.check_in }} | 
+							<span>Check out</span> {{ booking.check_out }} | 
+							<span>Pending</span> | 
+							<a class="btn btn-success btn-large" href="{% url 'request:delete-booking' booking_id=booking.id %}" style="color:red"><b>Delete</b></a>
+						</tr></td>
+					{% endfor %}
+				</table><br>
+				
+				<table>
+					{% for booking in accepted_bookings %}
+						<tr><td>
+							<a class="btn btn-success btn-large" href="{% url 'advertising:listing-details' listing_id=booking.listing_id %}" style="color:blue" target="_blank"><b>{{ booking.listing.title }}</b></a> | 
+							<span>Check in:</span> {{ booking.check_in }} | 
+							<span>Check out:</span> {{ booking.check_out }} | 
+							<span>Accepted</span> | 
+							<a  class="btn btn-success btn-large"href="{% url 'request:cancel-booking' booking_id=booking.id as_provider=0 %}" style="color:red"><b>Cancel</b></a>
+						</tr></td>
+					{% endfor %}
+					{% for booking in declined_bookings %}
+						<tr><td>
+							<a class="btn btn-success btn-large" href="{% url 'advertising:listing-details' listing_id=booking.listing_id %}" style="color:blue" target="_blank"><b>{{ booking.listing.title }}</b></a> | 
+							<span>Check in:</span> {{ booking.check_in }} | 
+							<span>Check out:</span> {{ booking.check_out }} | 
+							<span>Declined</span>
+						</tr></td>
+					{% endfor %}
+					{% for booking in canceled_bookings %}
+						<tr><td>
+							<a class="btn btn-success btn-large" href="{% url 'advertising:listing-details' listing_id=booking.listing_id %}" style="color:blue" target="_blank"><b>{{ booking.listing.title }}</b></a> | 
+							<span>Check in:</span> {{ booking.check_in }} | 
+							<span>Check out:</span> {{ booking.check_out }} | 
+							<span>Canceled</span>
+						</tr></td>
+					{% endfor %}
+				</table>
+			{% endif %}
+		</div>
+	</form>
+</div>
+{% endblock %}

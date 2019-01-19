@@ -1,0 +1,141 @@
+{% load bootstrap4 %}
+
+
+<style>
+	.dropbtn {
+		background-color: #343a40;
+		color: white;
+		font-size: 16px;
+		border: none;
+		cursor: pointer;
+	}
+	
+	.dropbtn:hover, .dropbtn:focus {
+		background-color: #343a40;
+	}
+	
+	.dropdown {
+		position: relative;
+		display: inline-block;
+	}
+	
+	.dropdown-content {
+		display: none;
+		position: absolute;
+		background-color: #f1f1f1;
+		min-width: 160px;
+		overflow: auto;
+		box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+		z-index: 1;
+	}
+	
+	.dropdown-content a {
+		color: black;
+		padding: 12px 16px;
+		text-decoration: none;
+		display: block;
+	}
+	
+	.dropdown a:hover {background-color: #ddd;}
+	
+	.show {display: block;}
+	
+	.buttonsearch {
+		margin-bottom: 5px;
+	}
+</style>
+
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+function myFunction2() {
+    document.getElementById("myDropdown2").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" style="background-color:#343a40 !important;">
+	<div class="container">
+		<a class="navbar-brand" href="{% url 'search:index' %}">ZETA</a>
+
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="oi oi-menu"></span> Menu
+			</button>
+		
+		<div class="collapse navbar-collapse" id="ftco-nav">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item active">
+					<form action="{% url 'search:controller' %}" method="post" >
+						{% csrf_token %}
+						<input type="hidden" name="search_type" value="listing"/>
+						<div style=" border-radius:30px; margin-top:30px;">
+							<button  style= "background-color:#343a40 !important; color:#CECECE;" name="navigation" type="submit" value="apply">
+
+								Search
+							</button>
+							<input type="text" name="city" value='{{ request.session.search_attributes.city }}'>
+						</div>
+					</form>
+				</li>
+				
+				<li class="nav-item active"><a href="{% url 'search:index' %}" class="nav-link">Home</a></li>
+				
+				{% if user.is_authenticated %}
+					<li class="nav-item"><a href="{% url 'users:profile' user_id=user.id %}" class="nav-link">Profile</a></li>
+					
+					<div style="margin-top:30px;">
+						<div class="dropdown">
+							<button onclick="myFunction2()" class="dropbtn">Manage</button>
+							<div id="myDropdown2" class="dropdown-content">
+								<a href="{% url 'request:manage-bookings' %}">Bookings</a>
+								{% if user.is_provider %}
+								<a href="{% url 'advertising:manage-listings' %}">Listings</a>
+								{% endif %}
+								{% if user.is_visitor %}
+								<a href="{% url 'request:manage-requests' %}">Requests</a>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				{% endif %}
+				
+				<li class="nav-item"><a href="{% url 'request:place-a-request' %}" class="nav-link">Place a request</a></li>
+				
+				<div style="margin-top:30px;">
+					<div class="dropdown">
+						<button onclick="myFunction()" class="dropbtn">Become a Host</button>
+						<div id="myDropdown" class="dropdown-content">
+							<a href="{% url 'advertising:become-a-host' %}">Host a home</a>
+							<a href="{% url 'search:request-results' %}">Search visitor request</a>
+						</div>
+					</div>
+				</div>
+				
+				{% if user.is_authenticated %}
+					<li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Log out</a></li>
+				{% else %}
+					<li class="nav-item"><a href="{% url 'users:signup' %}" class="nav-link">Sign up</a></li>
+					<li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Log in</a></li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+</nav>

@@ -1,0 +1,56 @@
+<!-- templates/registration/login.html -->
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block navigation %}{% endblock %}
+
+{% block content %}
+
+<style>
+	.whole{
+			/* top: 20%; */
+			/* left: 50%; */
+			font-family: "Open Sans", sans-serif;
+			font-size: 20px !important;
+			top:40%;
+			margin-top:20%;
+			padding-left:100px;
+			/* padding-top:100px; */
+			padding-bottom:500px;
+			display: inline-block;
+			color: #CECECE;
+			/* background-image: url('/static/images/bg-01.jpg'); */
+			/* width: 100%; */
+	}
+	.bg{
+		background-image: url('/static/images/bg-01.jpg');
+		width:100%;
+	}
+	.colour h2{color: #CECECE;}
+
+</style>
+
+<div class="bg">
+	<div class="whole">
+		<div class="colour">
+			<h2>Login</h2>
+		</div>
+		<form method="post">
+			{% csrf_token %}
+			<table>
+				{% for item in form %}
+				<tr>
+					<td>{{ item.label }}</td>
+					<td>{{item}}</td>
+				</tr>
+				{% endfor %}
+			</table>
+			<a  class="btn btn-success btn-large" href="">Forgot password?</a><br>
+			<button type="submit" class="btn btn-success btn-large">Log in</button><br>
+			<br>
+			Don't have an account? <a class="btn btn-success btn-large" href="{% url 'users:signup' %}">Sign up</a>
+		</form>
+	</div>
+</div>
+{% endblock %}

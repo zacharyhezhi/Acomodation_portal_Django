@@ -1,0 +1,81 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block navigation %}{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+	Hi {{ user.email }}!
+	<p><a href="{% url 'logout' %}">logout</a></p>
+{% else %}
+{% load static %}
+<!-- <img src="{% static "my_app/example.jpg" %}" alt="My image"> -->
+
+
+<div class="limiter">
+  <div class="container-login100"  alt="backimage">
+    <div class="wrap-login100" style="padding: 30px 0px 50px 0px;">
+      <span class="login100-form-title" style="padding-bottom: 41px;">
+        Zeta Accommodation
+      </span>
+
+      <form class="login100-form validate-form " style="padding: 5px 0px 33px 0px;"  method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit">Login</button>
+        </form>
+      <div id="dropDownSelect1"></div>
+        <p>You are not logged in</p>
+        <a href="{% url 'login' %}">login</a>
+        <a href="{% url 'users:signup' %}">signup</a>
+
+
+      <form class="login100-form validate-form " style="padding: 5px 0px 33px 0px;" method="post">
+        <div class="wrap-input100 validate-input" data-validate = "Enter username">
+          <input class="input100" type="text" name="username" placeholder="User name">
+          <span class="focus-input100"></span>
+          {% csrf_token %}
+        </div>
+
+        <div class="wrap-input100 validate-input" data-validate="Enter password">
+          <input class="input100" type="password" name="pass" placeholder="Password">
+          <span class="focus-input100"></span>
+          {{ form.as_p }}
+        </div>
+      
+        
+        
+        <div class="container-login100-form-btn" style="margin-top: 32px;">
+          <button class="login100-form-btn"  type="submit" >
+              <a href="{% url 'login' %}" style="font-family: Ubuntu-Bold;
+              font-size: 18px;
+              color: #fff;">login</a>
+          </button>
+        </div>
+
+        <div class="container-login100-form-btn" style="margin-top: 32px;">
+          <button class="login100-form-btn"  type="submit">
+            <a href="{% url 'users:signup' %}" style="font-family: Ubuntu-Bold;
+            font-size: 18px;
+            color: #fff;">signup</a>
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
+<div id="dropDownSelect1"></div>
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+  <a href="{% url 'users:signup' %}">signup</a> -->
+{% endif %}
+{% endblock %}

@@ -1,0 +1,193 @@
+<!-- templates/search/result.html -->
+{% extends 'base.html' %}
+
+{% block title %}Search Requests{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+{% block header %}
+<div style="margin-top:10%; text-align:center;">
+	<b>Search Requests<b>
+</div>
+{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<style>
+	table {
+		font-family: arial, sans-serif;
+		border-collapse: collapse;
+		margin-left: 15%;
+		width: 70%;
+	}
+	
+	td, th {
+		border: 1px solid #dddddd;
+		text-align: left;
+		padding: 8px;
+	}
+	
+	.title_search{
+		margin-top: 20px;
+		text-align: center;
+	}
+	
+	.search_out span{
+		display: inline-block;
+		margin-right: 25px;
+		margin-left: 25px;
+	}
+	
+	.search_out{
+		text-align: center;
+		overflow: hidden;
+		position: relative;
+	}
+	
+	.button_part button{
+		border-radius: 20px;
+		height: 50px;
+		width: 100px;
+		background-color: #343a40;
+		color: #FFFFFF;
+		font-size: 20px;
+		margin-top: 40px;
+		cursor: pointer;
+	}
+	
+	.style-image{
+		display: inline-block;
+	}
+	
+	.search_out input {
+		border-radius: 5px;
+		margin-left: 10px;
+	}
+</style>
+
+<script>
+function ShowElement() {
+	var x = document.getElementById("hide").style.display;
+	if (x === "none") {
+		document.getElementById("hide").style.display = "";
+	} else {
+		document.getElementById("hide").style.display = "none";
+	}
+}
+</script>
+
+<form action="{% url 'search:controller' %}" method="post" >
+	{% csrf_token %}
+	
+	<input type="hidden" name="search_type" value="request"/>
+	
+	<div class="search_out">
+		<span>Location: <input type="text" name="city" value='{{ request.session.request_attributes.city }}'></span>
+		<span>Check in: <input type="date" name="check_in" value='{{ request.session.request_attributes.check_in }}'></span>
+		<span>Check out: <input type="date" name="check_out" value='{{ request.session.request_attributes.check_out }}'></span>
+		<span>Guests: <input type="text" name="accommodates" value='{{ request.session.request_attributes.accommodates }}'></span>
+	</div>
+	
+	<div style="text-align: center;">
+		<button onclick="ShowElement()" type="button" class="btn btn-success" style=" margin-top:2%; font-size:20px; color: #484848; border-radius: 10px; ">
+			Advanced Search
+		</button>
+	</div>
+	
+	<div id= "hide" style="display:none;">
+		<div class="title_search">
+			<h2><b>Room type</b></h2>
+		</div>
+		<div class="search_out">
+			<span >
+				<input type="checkbox" name="room_type" value="Entire home/apt" {% if "Entire home/apt" in request.session.request_attributes.room_type %}checked{% endif %}> Entire home/apt
+			</span>
+			<span>
+				<input type="checkbox" name="room_type" value="Private room" {% if "Private room" in request.session.request_attributes.room_type %}checked{% endif %}> Private room
+			</span>
+			<span>
+				<input type="checkbox" name="room_type" value="Shared room" {% if "Shared room" in request.session.request_attributes.room_type %}checked{% endif %}> Shared room
+			</span>
+		</div>
+		
+		<div class="title_search" >
+			<h2><b>Price</b></h2>
+		</div>
+		<div class="search_out">
+			<span>
+				Min: <input type="text" name="min_price" size="15" value='{{ request.session.request_attributes.min_price }}'>
+			</span>
+			<span>
+				Max: <input type="text" name="max_price" size="15" value='{{ request.session.request_attributes.max_price }}'>
+			</span>
+		</div>
+		
+		<div class="title_search" >
+			<h2><b>Rooms and beds</b></h2>
+		</div>
+		<div class="search_out">
+			<span>
+				Beds: <input type="text" name="beds" size="15" value='{{ request.session.request_attributes.beds }}'>
+			</span>
+			<span>
+				Bedrooms: <input type="text" name="bedrooms" size="15" value='{{ request.session.request_attributes.bedrooms }}'>
+			</span>
+			<span>
+				Bathrooms: <input type="text" name="bathrooms" size="15" value='{{ request.session.request_attributes.bathrooms }}'>
+			</span>
+		</div>
+	</div>
+	
+	<div class="search_out">
+		<div class="button_part">
+			<button name="navigation" type="submit" value="clean">Clean</button>
+			<button name="navigation" type="submit" value="apply">Apply</button>
+		</div>
+	</div>
+</form><br>
+
+<div class="search_out">
+	<table>
+	{% for request in requests %}
+		<tr><td>
+			<a class="btn btn-success btn-large" href="{% url 'request:request-details' request_id=request.id %}" style="color:blue" target="_blank">
+				{% if request.property_type == 'Apartment' %}
+					<img src="{% static 'images/icon_apartment.jpg' %}" alt="Home" style="width:50px;height:50px;">
+				{% elif request.property_type == 'Condominium' %}
+					<img src="{% static 'images/icon_condominium.jpg' %}" alt="Home" style="width:50px;height:50px;">
+				{% elif request.property_type == 'House' %}
+					<img src="{% static 'images/icon_house.jpg' %}" alt="Home" style="width:50px;height:50px;">
+				{% elif request.property_type == 'Villa' %}
+					<img src="{% static 'images/icon_villa.jpg' %}" alt="Home" style="width:50px;height:50px;">
+				{% else %}
+					<img src="{% static 'images/icon_other.jpg' %}" alt="Home" style="width:50px;height:50px;">
+				{% endif %}
+				<b>{{ request.title }}</b>
+			</a> | 
+			{{ request.accommodates }} guest(s) | 
+			{{ request.city }} | 
+			{{ request.state }} | 
+			{{ request.neighbourhood }} | 
+			{{ request.check_in }} - {{ request.check_out }} | 
+			<b style="color:red">
+				$: 
+				{% if request.min_price %}
+					{% if request.max_price %}
+						{{ request.min_price }} - {{ request.max_price }}
+					{% else %}
+						&ge; {{ request.min_price }}
+					{% endif %}
+				{% else %}
+					{% if request.max_price %}
+						&le; {{ request.max_price }}
+					{% else %}
+						-
+					{% endif %}
+				{% endif %}
+			</b>
+			</tr></td>
+	{% endfor %}
+	</table>
+</div>
+{% endblock %}

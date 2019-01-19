@@ -1,0 +1,71 @@
+<!-- templates/advertising/step1-04-location.html -->
+{% extends 'base.html' %}
+
+{% block title %}Step 1: Start with the basics{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+
+
+{% block content %}
+<style>
+	.whole{
+			top: 25%;
+			left: 5%;
+			font-family: "Open Sans", sans-serif;
+			font-size: 20px !important;
+			margin-top: 150px;
+			/* text-align: left; */
+			padding-left:100px;
+			padding-top:5px;
+			color: #CECECE;
+			padding-bottom:200px;
+			display: inline-block;
+		}
+		.colour h3{color: #CECECE;}
+		.colour h4{color: #CECECE;}
+		.colour h1{color: #CECECE;}
+		.colour h2{color: #CECECE;}
+		.bg{
+			background-image: url('/static/images/bg-01.jpg');
+			width:100%;
+		}
+	
+	.button_part button{
+		border-radius: 20px;
+		height: 50px;
+		width: 100px;
+		background-color: #343a40;
+		color: #FFFFFF;
+		font-size: 20px;
+		margin-top: 40px;
+		cursor: pointer;
+	}
+</style>
+<div class="bg">
+<div class="whole">
+	<form action="{% url 'advertising:controller' %}" method="post">
+		{% csrf_token %}
+		<div class="colour">
+		<input type="hidden" name="stage" value="1-04"/>
+		<h1>Step 1: Start with the basics</h1>
+		<h2>Where’s your place located?</h2>
+		<h4>Street Address</h4>
+		<input type="text" name="street" value="{{ request.session.street }}" placeholder="e.g. 123 Main St" required/><br>
+		<h4>Apt, Suite. (optional)?</h4>
+		<input type="text" name="unit" value="{{ request.session.unit }}" placeholder="e.g. Unit 401"/><br>
+		<h4>City</h4>
+		<input type="text" name="city" value="{{ request.session.city }}" placeholder="e.g. Surry Hills" required/><br>
+		<h4>State</h4>
+		<input type="text" name="state" value="{{ request.session.state }}" placeholder="e.g. NSW" required/><br>
+		<h4>Post Code</h4>
+		<input type="text" name="zipcode" value="{{ request.session.zipcode }}" placeholder="e.g. 2010'" required/><br>
+	</div>
+		<div class="button_part">
+			<button name="navigation" type="submit" value="back"class="btn btn-success btn-large">Back</button>
+			<button name="navigation" type="submit" value="next"class="btn btn-success btn-large">Next</button>
+		</div>
+	</form>
+</div>
+</div>
+{% endblock %}

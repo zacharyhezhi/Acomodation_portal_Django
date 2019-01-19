@@ -1,0 +1,93 @@
+<!-- templates/advertising/step1-05-amenities.html -->
+{% extends 'base.html' %}
+
+{% block title %}Step 1: Start with the basics{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+
+
+{% block content %}
+<style>
+	.whole{
+			top: 25%;
+			left: 5%;
+			font-family: "Open Sans", sans-serif;
+			font-size: 17px !important;
+			margin-top: 150px;
+			/* text-align: left; */
+			padding-left:100px;
+			padding-top:5px;
+			color: #CECECE;
+			padding-bottom:45px;
+			display: inline-block;
+		}
+	.colour h3{color: #CECECE;}
+		.colour h4{color: #CECECE;}
+		.colour h1{color: #CECECE;}
+		.colour h2{color: #CECECE;}
+		.bg{
+			background-image: url('/static/images/bg-01.jpg');
+			width:100%;
+		}
+	.colour span {
+			color: #CECECE;
+			margin-left: 10px;
+			margin-top: 8px;
+		}
+	.button_part button{
+		border-radius: 20px;
+		height: 50px;
+		width: 100px;
+		background-color: #343a40;
+		color: #FFFFFF;
+		font-size: 20px;
+		margin-top: 40px;
+		cursor: pointer;
+	}
+</style>
+<div class="bg">
+<div class="whole">
+	<form action="{% url 'advertising:controller' %}" method="post">
+		{% csrf_token %}
+		
+		<input type="hidden" name="stage" value="1-05"/>
+		<div class="colour">
+			<h1>Step 1: Start with the basics</h1>
+		<h2>What amenities do you offer?</h2>
+		<input type="checkbox" name="amenities" value="Essentials">Essentials<br>
+		Towels, bed sheets, soap, toilet paper, and pillows<br>
+		<span>Towels, bed sheets, soap, toilet paper, and pillows</span><br>
+		<input type="checkbox" name="amenities" value="Wifi"><span>Wifi</span><br>
+		<input type="checkbox" name="amenities" value="Shampoo"><span>Shampoo</span><br>
+		<input type="checkbox" name="amenities" value="Closet/drawers"><span>Closet/drawers</span><br>
+		<input type="checkbox" name="amenities" value="TV"><span>TV</span><br>
+		<input type="checkbox" name="amenities" value="Heat"><span>Heat</span><br>
+		<input type="checkbox" name="amenities" value="Air conditioning"><span>Air conditioning</span><br>
+		<input type="checkbox" name="amenities" value="Breakfast, coffee, tea"><span>Breakfast, coffee, tea<br>
+		<input type="checkbox" name="amenities" value="Desk/workspace"><span>Desk/workspace</span><br>
+		<input type="checkbox" name="amenities" value="Fireplace"><span>Fireplace<br>
+		<input type="checkbox" name="amenities" value="Iron"><span>Iron</span><br>
+		<input type="checkbox" name="amenities" value="Hair dryer"><span>Hair dryer</span><br>
+		<input type="checkbox" name="amenities" value="Pets in the house"><span>Pets in the house</span><br>
+		<input type="checkbox" name="amenities" value="Private entrance"><span>Private entrance</span><br>
+		<br>
+		
+		<h3>Safety amenities</h3>
+		<input type="checkbox" name="amenities" value="Smoke detector"><span>Smoke detector</span><br>
+			<span>Check your local laws, which may require a working smoke detector in every room</span><br>
+		<input type="checkbox" name="amenities" value="Carbon monoxide detector"><span>Carbon monoxide detector</span><br>
+		<span>Check your local laws, which may require a working carbon monoxide detector in every room</span><br>
+		<input type="checkbox" name="amenities" value="First aid kit"><span>First aid kit</span><br>
+		<input type="checkbox" name="amenities" value="Safety card"><span>Safety card</span><br>
+		<span>Posted emergency information and resources</span><br>
+		<input type="checkbox" name="amenities" value="Fire extinguisher"><span>Fire extinguisher</span><br>
+	</div>
+		<div class="button_part">
+			<button name="navigation" type="submit" value="back"class="btn btn-success btn-large">Back</button>
+			<button name="navigation" type="submit" value="next"class="btn btn-success btn-large">Next</button>
+		</div>
+	</form>
+</div>
+</div>
+{% endblock %}

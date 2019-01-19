@@ -1,0 +1,146 @@
+<!-- templates/advertising/step3-05-availability-settings.html -->
+{% extends 'base.html' %}
+
+{% block title %}Step 3: Get ready for guests{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+
+
+{% block content %}
+<style>
+	.whole{
+			top: 25%;
+			left: 5%;
+			font-family: "Open Sans", sans-serif;
+			font-size: 15px !important;
+			margin-top: 150px;
+			/* text-align: left; */
+			padding-left:100px;
+			padding-top:5px;
+			color: #CECECE;
+			padding-bottom:200px;
+			display: inline-block;
+	
+		}
+	.colour h1{color: #CECECE;}
+		.colour h2{color: #CECECE;}
+		.colour h3{color: #CECECE;}
+		.colour h4{color: #CECECE;}
+		.bg{
+			background-image: url('/static/images/bg-01.jpg');
+			width:100%;
+		}
+	.button_part button{
+		border-radius: 20px;
+		height: 50px;
+		width: 100px;
+		background-color: #343a40;
+		color: #FFFFFF;
+		font-size: 20px;
+		margin-top: 40px;
+		cursor: pointer;
+	}
+	.colour span {
+			color: #CECECE;
+			margin-left: 10px;
+			margin-top: 8px;
+		}
+</style>
+<div class="bg">
+<div class="whole">
+	<form action="{% url 'advertising:controller' %}" method="post">
+		{% csrf_token %}
+		
+		<input type="hidden" name="stage" value="3-05"/>
+		<div class="colour">
+		<h1>Step 3: Get ready for guests</h1>
+		<h2>How much notice do you need before a guest arrives?</h2><br>
+		<select name="advance_notice">
+			<option value="Same day">Same day</option>
+			<option value="1 day">1 day</option>
+			<option value="2 days" selected>2 days</option>
+			<option value="3 days">3 days</option>
+			<option value="7 days">7 days</option>
+		</select><br>
+		<span>Tip: At least 2 days’ notice can help you plan for a guest’s arrival, but you might miss out on last-minute trips.</span><br>
+		<br>
+		
+		<h3>When can guests check in?</h3>
+		From:<br>
+		<select name="check_in_from">
+			<option value=""disabled selected>Select a time</option>
+			<option value="8AM">8AM</option>
+			<option value="9AM">9AM</option>
+			<option value="10AM">10AM</option>
+			<option value="11AM">11AM</option>
+			<option value="12PM">12PM (noon)</option>
+			<option value="1PM">1PM</option>
+			<option value="2PM">2PM</option>
+			<option value="3PM">3PM</option>
+			<option value="4PM">4PM</option>
+			<option value="5PM">5PM</option>
+			<option value="6PM">6PM</option>
+			<option value="7PM">7PM</option>
+			<option value="8PM">8PM</option>
+			<option value="9PM">9PM</option>
+			<option value="10PM">10PM</option>
+			<option value="11PM">11PM</option>
+			<option value="12AM">12AM (midnight)</option>
+			<option value="1AM">1AM (next day)</option>
+		</select><br>
+		To:<br>
+		<select name="check_in_to">
+			<option value=""disabled selected>Select a time</option>
+			<option value="9AM">9AM</option>
+			<option value="10AM">10AM</option>
+			<option value="11AM">11AM</option>
+			<option value="12PM">12PM (noon)</option>
+			<option value="1PM">1PM</option>
+			<option value="2PM">2PM</option>
+			<option value="3PM">3PM</option>
+			<option value="4PM">4PM</option>
+			<option value="5PM">5PM</option>
+			<option value="6PM">6PM</option>
+			<option value="7PM">7PM</option>
+			<option value="8PM">8PM</option>
+			<option value="9PM">9PM</option>
+			<option value="10PM">10PM</option>
+			<option value="11PM">11PM</option>
+			<option value="12AM">12AM (midnight)</option>
+			<option value="1AM">1AM (next day)</option>
+			<option value="2AM">2AM (next day)</option>
+		</select><br>
+		<br>
+		
+		<h3>How far in advance can guests book?</h3>
+		<select name="advance_booking" required>
+			<option value="Any time ">Any time</option>
+			<option value="3 months">3 months</option>
+			<option value="6 months">6 months</option>
+			<option value="9 months">9 months</option>
+			<option value="1 year">1 year</option>
+			<option value="Dates unavailable default" selected>Dates unavailable default</option>
+		</select><br>
+		<span>Tip: Avoid cancelling or declining guests by only unblocking dates you can host.</span><br>
+		<br>
+		
+		<h3>How long can guests stay?</h3>
+			<span>Min: </span><input type="text" name="minimum_nights" value="{{ request.session.minimum_nights }}" required/><br>
+		<br>
+		<span>Max:</span> <input type="text" name="maximum_nights" value="{{ request.session.maximum_nights }}" required/><br>
+		<br>
+		
+		<h3>Instant bookable</h3>
+		<input type="radio" name="instant_bookable" value="no" checked>No
+		<input type="radio" name="instant_bookable" value="yes">Yes<br>
+	</div>
+		<div class="button_part">
+			<button name="navigation" type="submit" value="back" class="btn btn-success btn-large">Back</button>
+			<button name="navigation" type="submit" value="next" class="btn btn-success btn-large">Next</button>
+		</div>
+	</div>
+	</form>
+</div>
+</div>
+{% endblock %}

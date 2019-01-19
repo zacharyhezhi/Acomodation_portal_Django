@@ -1,0 +1,111 @@
+<!-- templates/request/place-a-request.html -->
+{% extends 'base.html' %}
+
+{% block title %}Place a Request{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+{% block content %}
+<style>
+	.search_out{
+		text-align: center;
+		overflow: hidden;
+		position: relative;
+	}
+	
+	.button_part button{
+		border-radius: 20px;
+		height: 50px;
+		width: 100px;
+		background-color: #343a40;
+		color: #FFFFFF;
+		font-size: 20px;
+		margin-top: 40px;
+		cursor: pointer;
+	}
+	
+	.button_1{
+		border-radius: 20px;
+		height: 50px;
+		width: 100px;
+		background-color: #343a40;
+		color: #FFFFFF;
+		font-size: 20px;
+		margin-top: 40px;
+		width: 40%;
+		margin-left: 30%;
+		margin-right: 30%;
+		cursor: pointer;
+	}
+	.whole{
+		margin-top: 200px; 
+		text-align: center;
+		display: inline-block;
+		padding-bottom:200px;
+		top: 25%;
+		left: 5%;
+		padding-top:5px;
+		padding-bottom:400px;
+		margin-bottom:400;
+
+	}
+	
+	.colour h1{color: #CECECE;}
+	
+	.colour h2{color: #CECECE;}
+	
+	.colour h3{color: #CECECE;}
+	
+	.colour h4{color: #CECECE;}
+	
+	.bg{
+		background-image: url('/static/images/bg-01.jpg');
+		width:100%;
+		text-align: center;
+	}
+</style>
+
+<script>
+		function UnloginWarn() {
+			alert("Please log in before saving!");
+		}
+</script>	
+
+{% if messages %}
+<ul class="messages">
+	{% for message in messages %}
+	<script>
+			UnloginWarn();
+	</script> 
+	{% endfor %}
+</ul>
+{% endif %}
+
+<div class="bg">
+	<div class="whole">
+		<form action="{% url 'request:controller' %}" method="post">
+			{% csrf_token %}
+			
+			<div class="colour">
+				<h1>Cannot find the place you are looking for?</h1>
+				<h2>Now let’s get some details about the place you are after.</h2>
+				
+				<button class="button_1" name="navigation" type="submit" value="proceed">
+					Proceed
+				</button>
+				
+				<div style="margin-top:10%; text-align:center;">
+					<h3><b>You can choose to save or clean the data here</b></h3>
+				</div>
+			</div>
+			
+			<div class="search_out">
+				<div class="button_part">
+					<button name="navigation" type="submit" value="clean" class="btn btn-success btn-large">Clean</button>
+					<button name="navigation" type="submit" value="save" class="btn btn-success btn-large">Save</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+{% endblock %}

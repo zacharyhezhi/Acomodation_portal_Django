@@ -1,0 +1,81 @@
+<!-- templates/advertising/step3-04-keep-calendar-up-to-date.html -->
+{% extends 'base.html' %}
+
+{% block title %}Step 3: Get ready for guests{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+
+
+{% block content %}
+<style>
+	.whole{
+			top: 25%;
+			left: 5%;
+			font-family: "Open Sans", sans-serif;
+			font-size: 15px !important;
+			margin-top: 150px;
+			/* text-align: left; */
+			padding-left:100px;
+			padding-top:5px;
+			color: #CECECE;
+			padding-bottom:200px;
+			display: inline-block;
+		}
+	
+		.button_part button{
+			border-radius: 20px;
+			height: 50px;
+			width: 100px;
+			background-color: #388af5;
+			color: #FFFFFF;
+			font-size: 20px;
+			margin-top: 40px;
+			margin-bottom:200px;
+		}
+		.colour h3{color: #CECECE;}
+		.colour h4{color: #CECECE;}
+		.colour h1{color: #CECECE;}
+		.colour h2{color: #CECECE;}
+		.bg{
+			background-image: url('/static/images/bg-01.jpg');
+			width:100%;
+		}
+	
+	.button_part button{
+		border-radius: 20px;
+		height: 50px;
+		width: 100px;
+		background-color: #343a40;
+		color: #FFFFFF;
+		font-size: 20px;
+		margin-top: 40px;
+		cursor: pointer;
+	}
+</style>
+<div class="bg">
+<div class="whole">
+	<form action="{% url 'advertising:controller' %}" method="post">
+		{% csrf_token %}
+		
+		<input type="hidden" name="stage" value="3-04"/>
+		<div class="colour">
+		<h1>Step 3: Get ready for guests</h1>
+		
+		<h2>Successful hosting starts with an accurate calendar</h2>
+		Guests will book available days instantly. Only get booked when you can host by keeping your calendar and availability settings up-to-date.<br>
+		<br>
+		
+		Cancelling disrupts guests’ plans. If you cancel because your calendar is inaccurate, you’ll be charged a penalty fee and the dates won’t be available for anyone else to book.<br>
+		<br>
+		</div>
+		<input type="checkbox">Got it! I’ll keep my calendar up to date.</br>
+		
+		<div class="button_part">
+			<button name="navigation" type="submit" value="back" class="btn btn-success btn-large">Back</button>
+			<button name="navigation" type="submit" value="next" class="btn btn-success btn-large">Next</button>
+		</div>
+	</form>
+</div>
+</div>
+{% endblock %}

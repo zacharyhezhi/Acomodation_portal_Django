@@ -1,0 +1,85 @@
+<!-- templates/advertising/step1-02-bedrooms.html -->
+{% extends 'base.html' %}
+
+{% block title %}Step 1: Start with the basics{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+
+
+{% block content %}
+<style>
+	.colour h1{color: #CECECE;}
+	.colour h2{color: #CECECE;}
+	.whole{
+		/* position: fixed; or absolute */
+		top: 5%;
+		left: 5%;
+		font-family: "Open Sans", sans-serif;
+		font-size: 20px !important;
+		padding-left:100px;
+		padding-top:5px;
+		color: #CECECE;
+		padding-bottom:500px;
+		display: inline-block;
+		margin-top: 150px; 
+		text-align: left;
+	}
+	.bg{
+		background-image: url('/static/images/bg-01.jpg');
+		width:100%;		
+	}
+	.button_part button{
+		border-radius: 20px;
+		height: 50px;
+		width: 100px;
+		background-color: #343a40;
+		color: #FFFFFF;
+		font-size: 20px;
+		margin-top: 40px;
+		cursor: pointer;
+	}
+</style>
+<div class="colour"> 
+	<div class="bg">
+		<div class="whole">
+			<div style="margin-top:10%; text-align:center;">
+				<div class="colour">
+					<h1>Step 1: Start with the basics</h1>
+				</div>
+			</div>
+			<form action="{% url 'advertising:controller' %}" method="post">
+				{% csrf_token %}
+				
+				<input type="hidden" name="stage" value="1-02"/>
+				
+				How many guests can your place accommodate?<br>
+				<input type="text" name="accommodates" value="{{ request.session.accommodates|default:'1' }}" required/> guests<br>
+				<br>
+				
+				How many bedrooms can guests use?<br>
+				<input type="text" name="bedrooms" value="{{ request.session.bedrooms|default:'1' }}" required/><br>
+				<br>
+				
+				How many beds can guests use?<br>
+				<input type="text" name="beds" value="{{ request.session.beds|default:'1' }}" required/><br>
+				<br>
+				
+				Type of bed<br>
+				<select name="bed_type">
+					<option value="Pull-out Sofa">Pull-out Sofa</option>
+					<option value="Airbed">Airbed</option>
+					<option value="Futon">Futon</option>
+					<option value="Real Bed">Real Bed</option>
+					<option value="Couch">Couch</option>
+				</select><br>
+				
+				<div class="button_part">
+					<button class="btn btn-success" name="navigation" type="submit" value="back">Back</button>
+					<button class="btn btn-success" name="navigation" type="submit" value="next">Next</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

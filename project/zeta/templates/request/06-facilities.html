@@ -1,0 +1,82 @@
+<!-- templates/request/06-facilities.html -->
+{% extends 'base.html' %}
+
+{% block title %}Place a Request{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+
+
+{% block content %}
+<style>
+	.whole{
+		top: 20%;
+		left:5%;
+		/* left: 50%; */
+		font-family: "Open Sans", sans-serif;
+		font-size: 20px !important;
+		margin-top:100px;
+		/* margin-left:100px; */
+		/* float:left; */
+		margin-top: 150px;
+		/* text-align: left; */
+		padding-left:100px;
+		padding-top:5px;
+		color: #CECECE;
+		padding-bottom:200px;
+		display: inline-block;
+	}
+	
+	.colour h1{color: #CECECE;}
+	
+	.colour h2{color: #CECECE;}
+	
+	.colour h3{color: #CECECE;}
+	
+	.colour h4{color: #CECECE;}
+	
+	.bg{
+		background-image: url('/static/images/bg-01.jpg');
+		width:100%;
+	}
+	
+	.button_part button{
+		border-radius: 20px;
+		height: 50px;
+		width: 100px;
+		background-color: #343a40;
+		color: #FFFFFF;
+		font-size: 20px;
+		margin-top: 40px;
+		cursor: pointer;
+	}
+</style>
+
+<div class="bg">
+	<div class="whole">
+		<form action="{% url 'request:controller' %}" method="post">
+			{% csrf_token %}
+			
+			<input type="hidden" name="stage" value="06"/>
+			
+			<div class="colour">
+				<h1>Place a Request</h1>
+				<h2>What facilities do you expect?</h2>
+				<input type="checkbox" name="access" value="Pool">Pool<br>
+				<input type="checkbox" name="access" value="Kitchen">Kitchen<br>
+				<input type="checkbox" name="access" value="Laundry – washer">Laundry – washer<br>
+				<input type="checkbox" name="access" value="Laundry – dryer">Laundry – dryer<br>
+				<input type="checkbox" name="access" value="Parking">Parking<br>
+				<input type="checkbox" name="access" value="Lift">Lift<br>
+				<input type="checkbox" name="access" value="Hot tub">Hot tub<br>
+				<input type="checkbox" name="access" value="Gym">Gym<br>
+			</div>
+			
+			<div class="button_part">
+				<button name="navigation" type="submit" value="back" class="btn btn-success btn-large">Back</button>
+				<button name="navigation" type="submit" value="next" class="btn btn-success btn-large">Next</button>
+			</div>
+		</form>
+	</div>
+</div>
+{% endblock %}

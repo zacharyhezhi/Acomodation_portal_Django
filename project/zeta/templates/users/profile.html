@@ -1,0 +1,37 @@
+<!-- templates/users/profile.html -->
+{% extends 'base.html' %}
+
+{% block title %}{{ listing.title }}{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+{% block content %}
+<style>
+	.whole{
+		font-family: "Open Sans", sans-serif;
+		font-size: 20px !important;
+		margin-top: 10%;
+		margin-left: 10%;
+		display: inline-block;
+	}
+</style>
+
+<div class= "whole">
+	<form>
+		{% csrf_token %}
+		
+		<div style="text-align:left;">
+			<h1><b>Hey, I'm {{ customuser.first_name }}</b></h1>
+		</div>
+		
+		<img src="{{ customuser.picture_url }}" alt="User" style="width:300px;height:250px;"><br>
+		<br>
+		
+		{{ customuser.location }}<br>
+		Joined in {{ customuser.date_joined }}<br>
+		{% if customuser.id == user.id %}
+			<a href="{% url 'users:edit' user_id=user.id %}" style="color:red">Edit Profile</a>
+		{% endif %}
+	</form>
+</div>
+{% endblock %}

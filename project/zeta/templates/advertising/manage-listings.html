@@ -1,0 +1,68 @@
+<!-- templates/advertising/manage-listings.html -->
+{% extends 'base.html' %}
+
+{% block title %}Manage Listings{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+{% block header %}
+<div style="margin-top:10%; text-align:center;">
+	<b>Manage Listings</b>
+</div>
+{% endblock %}
+
+{% block content %}
+<style>
+	table {
+		font-family: arial, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+	}
+	
+	td, th {
+		border: 1px solid #dddddd;
+		text-align: left;
+		padding: 8px;
+	}
+	
+	.whole{
+		position: absolute;
+		margin-top: 5%;
+		left: 10%;
+		font-family: "Open Sans", sans-serif;
+		font-size: 24px !important;
+	}
+	
+	.button_part button{
+		border-radius: 20px;
+		height: 50px;
+		width: 100px;
+		background-color: #343a40;
+		color: #FFFFFF;
+		font-size: 20px;
+		margin-top: 40px;
+		cursor: pointer;
+	}
+</style>
+
+<div class = "whole">
+	<form action="{% url 'request:controller' %}" method="post">
+		{% csrf_token %}
+		
+		<table>
+		{% for listing in listings %}
+			<tr><td>
+			<a class="btn btn-success btn-large" href="{% url 'advertising:listing-details' listing_id=listing.id %}" style="color:blue" target="_blank">
+				<img src="{{ listing.picture_url }}" alt="Home" style="width:100px;height:100px;">
+				<b>{{ listing.title }}</b>
+			</a> | 
+			{{ listing.street }} | 
+			{{ listing.daily_price }} per night | 
+			<a class="btn btn-success btn-large" href="{% url 'advertising:delete-listing' listing_id=listing.id %}" style="color:red"><b>Delete</b></a> | 
+			<a class="btn btn-success btn-large" href="{% url 'advertising:edit-listing' listing_id=listing.id %}" style="color:red" target="_blank"><b>Edit</b></a>
+			</tr></td>
+		{% endfor %}
+		</table>
+	</form>
+</div>
+{% endblock %}

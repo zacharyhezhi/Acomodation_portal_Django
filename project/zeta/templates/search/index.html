@@ -1,0 +1,396 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+
+{% block content %}
+{% load static %}
+
+  <body>
+  
+  <img src="{% static "images/bg_2.jpg" %}" alt="My image">
+  
+  <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-12">
+
+          <div class="block-32">
+            <form action="{% url 'search:controller' %}" method="post" >
+              {% csrf_token %}
+              
+              <input type="hidden" name="search_type" value="listing"/>
+              
+              <div class="row">
+                <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
+                  <label for="checkin">Check In</label>
+                  <div class="field-icon-wrap">
+                    <div class="icon"><span class="icon-calendar"></span></div>
+                    <input type="date" name="check_in" id="checkin_date" class="form-control" value='{{ request.session.search_attributes.check_in }}' required>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
+                  <label for="checkin">Check Out</label>
+                  <div class="field-icon-wrap">
+                    <div class="icon"><span class="icon-calendar"></span></div>
+                    <input type="date" name="check_out" id="checkout_date" class="form-control" value='{{ request.session.search_attributes.check_out }}' required>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3 mb-md-0 col-lg-3">
+                  <div class="row">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                      <label for="checkin">Guests</label>
+                      <div class="field-icon-wrap">
+                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                        <select  name="accommodates" id="" class="form-control" value='{{ request.session.search_attributes.accommodates }}' required>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4+</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3 mb-md-0">
+                      <label for="checkin">Location</label>
+                      <div class="field-icon-wrap">
+                        <input type="text" name="city" class="form-control" value='{{ request.session.search_attributes.city }}' required>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-3 align-self-end">
+                  <button class="btn btn-primary btn-block" name="navigation" type="submit" value="apply">Search</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row site-section">
+        <div class="col-md-12">
+          <div class="row mb-5">
+            <div class="col-md-7 section-heading">
+              <span class="subheading-sm">Services</span>
+              <h2 class="heading">Facilities &amp; Services</h2>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="media block-6">
+            <div class="icon"><span class="flaticon-double-bed"></span></div>
+            <div class="media-body">
+              <h3 class="heading">Luxury Rooms</h3>
+                <p>Luxury rooms can accomodate your high requirement on accomodation.</p>
+            </div>
+          </div>      
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="media block-6">
+            <div class="icon"><span class="flaticon-wifi"></span></div>
+            <div class="media-body">
+              <h3 class="heading">Fast &amp; Free Wifi</h3>
+              <p>Enjoy your wifi throughout your accomodation, on your devices.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="media block-6">
+            <div class="icon"><span class="flaticon-customer-service"></span></div>
+            <div class="media-body">
+              <h3 class="heading">Call Us 24/7</h3>
+              <p>The 24/7 customer service will make you feel welcomed as your are at home .</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="media block-6">
+            <div class="icon"><span class="flaticon-taxi"></span></div>
+            <div class="media-body">
+              <h3 class="heading">Travel Accomodation</h3>
+              <p>Different types of accomodations can satisfy your need in multiple ways.</p>
+            </div>
+          </div>      
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="media block-6">
+            <div class="icon"><span class="flaticon-credit-card"></span></div>
+            <div class="media-body">
+              <h3 class="heading">Accepts Credit Card</h3>
+              <p>Credit cards can be accepted though worldwide.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="media block-6">
+            <div class="icon"><span class="flaticon-dinner"></span></div>
+            <div class="media-body">
+              <h3 class="heading">Restaurant</h3>
+              <p>Variable of dishes can be accessed in the restaurant .</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="site-section block-13 bg-light">
+      <div class="container">
+         <div class="row mb-5">
+            <div class="col-md-7 section-heading">
+              <span class="subheading-sm">Featured Rooms</span>
+              <h2 class="heading">Rooms &amp; Suites</h2>
+              <p>At Zeta  you can choose from a range of hotel accommodation 
+                from guest rooms to spacious suites. Meet and do business in meeting and conference rooms or
+                 get active at LivingWell Premier Health Club with swimming pool, and full gym facilities.</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="nonloop-block-13 owl-carousel">
+                  <div class="item">
+                    <div class="block-34">
+                      <div class="image">
+                        <a href="#"><img src="../static/images/img_1.jpg" alt="Image placeholder"></a>
+                      </div>
+                      <div class="text">
+                        <h2 class="heading">Bachelor Room</h2>
+                        <div class="price"><sup>$</sup><span class="number">156</span><sub>/per night</sub></div>
+                        <ul class="specs">
+                          <li><strong>Adults:</strong> 1</li>
+                          <li><strong>Categories:</strong> Single</li>
+                          <li><strong>Facilities:</strong> Closet with hangers, HD flat-screen TV, Telephone</li>
+                          <li><strong>Size:</strong> 20m<sup>2</sup></li>
+                          <li><strong>Bed Type:</strong> One bed</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="item">
+                    <div class="block-34">
+                      <div class="image">
+                        <a href="#"><img src="../static/images/img_2.jpg" alt="Image placeholder"></a>
+                      </div>
+                      <div class="text">
+                        <h2 class="heading">Family Room</h2>
+                        <div class="price"><sup>$</sup><span class="number">320</span><sub>/per night</sub></div>
+                        <ul class="specs">
+                          <li><strong>Adults:</strong> 1</li>
+                          <li><strong>Categories:</strong> Single</li>
+                          <li><strong>Facilities:</strong> Closet with hangers, HD flat-screen TV, Telephone</li>
+                          <li><strong>Size:</strong> 20m<sup>2</sup></li>
+                          <li><strong>Bed Type:</strong> One bed</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="item">
+                    <div class="block-34">
+                      <div class="image">
+                        <a href="#"><img src="../static/images/img_3.jpg" alt="Image placeholder"></a>
+                      </div>
+                      <div class="text">
+                        <h2 class="heading">Presidential Room</h2>
+                        <div class="price"><sup>$</sup><span class="number">425</span><sub>/per night</sub></div>
+                        <ul class="specs">
+                          <li><strong>Adults:</strong> 1</li>
+                          <li><strong>Categories:</strong> Single</li>
+                          <li><strong>Facilities:</strong> Closet with hangers, HD flat-screen TV, Telephone</li>
+                          <li><strong>Size:</strong> 20m<sup>2</sup></li>
+                          <li><strong>Bed Type:</strong> One bed</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="item">
+                    <div class="block-34">
+                      <div class="image">
+                        <a href="#"><img src="../static/images/img_4.jpg" alt="Image placeholder"></a>
+                      </div>
+                      <div class="text">
+                        <h2 class="heading">Double Room</h2>
+                        <div class="price"><sup>$</sup><span class="number">525</span><sub>/per night</sub></div>
+                        <ul class="specs">
+                          <li><strong>Adults:</strong> 1</li>
+                          <li><strong>Categories:</strong> Single</li>
+                          <li><strong>Facilities:</strong> Closet with hangers, HD flat-screen TV, Telephone</li>
+                          <li><strong>Size:</strong> 20m<sup>2</sup></li>
+                          <li><strong>Bed Type:</strong> One bed</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="item">
+                    <div class="block-34">
+                      <div class="image">
+                        <a href="#"><img src="../static/images/img_5.jpg" alt="Image placeholder"></a>
+                      </div>
+                      <div class="text">
+                        <h2 class="heading">VIP Room</h2>
+                        <div class="price"><sup>$</sup><span class="number">600</span><sub>/per night</sub></div>
+                        <ul class="specs">
+                          <li><strong>Adults:</strong> 1</li>
+                          <li><strong>Categories:</strong> Single</li>
+                          <li><strong>Facilities:</strong> Closet with hangers, HD flat-screen TV, Telephone</li>
+                          <li><strong>Size:</strong> 20m<sup>2</sup></li>
+                          <li><strong>Bed Type:</strong> One bed</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="item">
+                    <div class="block-34">
+                      <div class="image">
+                        <a href="#"><img src="../static/images/img_6.jpg" alt="Image placeholder"></a>
+                      </div>
+                      <div class="text">
+                        <h2 class="heading">VIP Room</h2>
+                        <div class="price"><sup>$</sup><span class="number">760</span><sub>/per night</sub></div>
+                        <ul class="specs">
+                          <li><strong>Adults:</strong> 1</li>
+                          <li><strong>Categories:</strong> Single</li>
+                          <li><strong>Facilities:</strong> Closet with hangers, HD flat-screen TV, Telephone</li>
+                          <li><strong>Size:</strong> 20m<sup>2</sup></li>
+                          <li><strong>Bed Type:</strong> One bed</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  
+              </div>
+    
+            </div> <!-- .col-md-12 -->
+          </div>
+      </div>
+    </div>
+
+
+
+    <div class="block-30 block-30-sm item" style="background-image: url('../static/images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-md-12">
+              <h2 class="heading">Quality accommodation that exceeds the expectations</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div class="site-section bg-light">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md-7 section-heading">
+            <span class="subheading-sm">Reviews</span>
+            <h2 class="heading">Guest Reviews</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-4">
+
+              <div class="block-33">
+                  <div class="vcard d-flex mb-3">
+                    <div class="image align-self-center"><img src="../static/images/person_3.jpg" alt="Person here"></div>
+                    <div class="name-text align-self-center">
+                      <h2 class="heading">Zachary Knowles</h2>
+                      <span class="meta">Satisfied Customer</span>
+                    </div>
+                  </div>
+                  <div class="text">
+                    <blockquote>
+                      <p>&rdquo; I really enjoy the accomodation experience in Zeta, great living space, excellent view, adequated life facilities .I'm giving them 5 stars, Because their customer service was AWESOME to me and my family... We went to Florida in July, stayed in one of the homes, that's was actually nice, but had a ton of issues... After bringing our concerns to Zeta, they not only handled the situation, they also actually reimbursed me money for our first day issues.. With no back and forth and just a few emails and boom.. It was taken care of.&ldquo;</p>
+                    </blockquote>
+                  </div>
+                </div>
+    
+              </div>
+              <div class="col-md-6 col-lg-4">
+    
+                <div class="block-33">
+                  <div class="vcard d-flex mb-3">
+                    <div class="image align-self-center"><img src="../static/images/person_2.jpg" alt="Person here"></div>
+                    <div class="name-text align-self-center">
+                      <h2 class="heading">Andrew Wirjaputra</h2>
+                      <span class="meta">Satisfied Customer</span>
+                    </div>
+                  </div>
+                  <div class="text">
+                    <blockquote>
+                      <p>&rdquo;We rented a home in an area near Omaha Nebraska. It looked very nice. The basement was storage and off limits. No problem, we paid hundreds of dollars for four nights and yay! In the first ten minutes we figure out the basement is inhabited by a drunk guy who does maintenance. He left the basement door ajar weaving his truck past our car in the driveway to get away then drove up and down the street. Really scary when he parked pointed into the backyard. Got pictures of piles of booze bottles etc.                      e &ldquo;</p>
+                    </blockquote>
+                  </div>
+                </div>
+    
+              </div>
+              <div class="col-md-6 col-lg-4">
+    
+                <div class="block-33">
+                  <div class="vcard d-flex mb-3">
+                    <div class="image align-self-center"><img src="../static/images/person_1.jpg" alt="Person here"></div>
+                    <div class="name-text align-self-center">
+                      <h2 class="heading">Eric Zhang</h2>
+                      <span class="meta">Satisfied Customer</span>
+                    </div>
+                  </div>
+                  <div class="text">
+                    <blockquote>
+                      <p>&rdquo;My girlfriend and I just recently rented a unit on South Beach Florida. Definitely not up to par for the money we were paying. After contacting the host, with no response, I called Zeta customer service. I was lucky enough to have Macie answer the phone. Macie became my case manager and what a great one she is! She contacted the host on our behalf and within thirty minutes there was a call from the host. I will say the Host was quite responsive on fixing some of our concerns. However, in order to correct the problems, we had many people in our pad fixing the problems. &ldquo;</p>
+                    </blockquote>
+                  </div>
+                </div>
+    
+              </div>
+            </div>
+          </div>
+        </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-6 col-lg-4">
+          <h3 class="heading-section">About Us</h3>
+          <p class="mb-5">Zeta's goal is to create a web application that will allow providers to present their property, and searchers to review the offers and reserve or rent a property, but are limited to properties located in NSW.</p>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <h3 class="heading-section">Accommodations</h3>
+          
+          {% for listing in listings %}
+          <div class="block-21 d-flex mb-4">
+            <figure class="mr-3">
+              <img src="{{ listing.picture_url }}" alt="Home" class="img-fluid">
+            </figure>
+            <div class="text">
+              <h3 class="heading"><a href="{% url 'advertising:listing-details' listing_id=listing.id %}" target="_blank">{{ listing.title }}</a></h3>
+              <div class="meta">
+                <div><a href="{% url 'users:profile' user_id=listing.provider_id %}" target="_blank"><span class="icon-person"></span>{{ listing.provider.first_name }} {{ listing.provider.last_name }}, your host</a></div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="block-23">
+            <h3 class="heading-section">Contact Info</h3>
+              <ul>
+                <li><span class="icon icon-map-marker"></span><span class="text">Kensington, NSW 2052. Australia. Postal Address: UNSW Sydney, NSW 2052</span></li>
+                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">zacharyknowles9@gmail.com</span></a></li>
+                <li><span class="icon icon-clock-o"></span><span class="text">Monday &mdash; Friday 8:00am - 5:00pm</span></li>
+              </ul>
+            </div>
+        </div> 
+      </div>
+    </div>
+  </footer>
+
+    
+  </body>
+</html>
+{% endblock %}

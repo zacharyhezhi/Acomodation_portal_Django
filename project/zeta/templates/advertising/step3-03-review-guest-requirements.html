@@ -1,0 +1,90 @@
+<!-- templates/advertising/step3-03-review-guest-requirements.html -->
+{% extends 'base.html' %}
+
+{% block title %}Step 3: Get ready for guests{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+
+
+{% block content %}
+<style>
+	.whole{
+			top: 25%;
+			left: 5%;
+			font-family: "Open Sans", sans-serif;
+			font-size: 15px !important;
+			margin-top: 150px;
+			/* text-align: left; */
+			padding-left:100px;
+			padding-top:5px;
+			color: #CECECE;
+			padding-bottom:200px;
+			display: inline-block;
+		}
+	
+		.button_part button{
+			border-radius: 20px;
+			height: 50px;
+			width: 100px;
+			background-color: #388af5;
+			color: #FFFFFF;
+			font-size: 20px;
+			margin-top: 40px;
+		}
+		.colour h3{color: #CECECE;}
+		.colour h4{color: #CECECE;}
+		.colour h1{color: #CECECE;}
+		.colour h2{color: #CECECE;}
+		.bg{
+			background-image: url('/static/images/bg-01.jpg');
+			width:100%;
+		}
+	
+	.button_part button{
+		border-radius: 20px;
+		height: 50px;
+		width: 100px;
+		background-color: #343a40;
+		color: #FFFFFF;
+		font-size: 20px;
+		margin-top: 40px;
+		cursor: pointer;
+	}
+</style>
+<div class="bg">
+<div class="whole">
+	<form action="{% url 'advertising:controller' %}" method="post">
+		{% csrf_token %}
+		
+		<input type="hidden" name="stage" value="3-03"/>
+		<div class="colour">
+		<h1> Step 3: Get ready for guests </h1>
+		
+		<h2>Review your guest requirements</h2>
+		<h3>Airbnb's guest requirements</h3>
+		<a href="{% url 'advertising:3-01' %}" style="color:red" class="btn btn-success btn-large">Review</a><br>
+		&#9989; Email address<br>
+		&#9989; Confirmed phone number<br>
+		&#9989; Payment information<br>
+		&#9989; A message about the guest's trip<br>
+		&#9989; Check-in time for last minute trips<br>
+		<br>
+		
+		<h4>Your additional requirements</h4>
+		<a class="btn btn-success btn-large" href="{% url 'advertising:3-01' %}" style="color:red">Edit</a><br>
+		<h4>No additional requirements</h4>
+		<br>
+		
+		<h4>Your House Rules</h4>
+		<a class="btn btn-success btn-large" href="{% url 'advertising:3-02' %}" style="color:red">Edit</a>
+		<br>&#9989; Check-in is anytime after 3PM<br>
+	</div>
+		<div class="button_part">
+			<button name="navigation" type="submit" value="back" class="btn btn-success btn-large">Back</button>
+			<button name="navigation" type="submit" value="next" class="btn btn-success btn-large">Next</button>
+		</div>
+	</form>
+</div>
+</div>
+{% endblock %}

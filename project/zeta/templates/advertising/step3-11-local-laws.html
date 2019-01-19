@@ -1,0 +1,74 @@
+<!-- templates/advertising/step3-11-local-laws.html -->
+{% extends 'base.html' %}
+
+{% block title %}Step 3: Get ready for guests{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+
+
+{% block content %}
+<style>
+	.whole{
+		display: inline-block;
+			top: 25%;
+			left: 5%;
+			font-family: "Open Sans", sans-serif;
+			font-size: 20px !important;
+			padding-left:100px;
+			padding-top:150px;
+			color: #CECECE;
+			padding-bottom:100px;
+			margin-bottom: 200px;
+	}
+	.bg{
+			background-image: url('/static/images/bg-01.jpg');
+			width:100%;
+		}
+		.colour h1{color: #CECECE;}
+		.colour h2{color: #CECECE;}
+		.colour h3{color: #CECECE;}
+		.colour h4{color: #CECECE;}
+
+
+	border-radius: 20px;{
+		height: 50px;
+		width: 100px;
+		background-color: #343a40;
+		color: #FFFFFF;
+		font-size: 20px;
+		margin-top: 100px;
+		cursor: pointer;
+	}
+</style>
+<div class="bg">
+<div class="whole">
+	<form action="{% url 'advertising:controller' %}" method="post">
+		{% csrf_token %}
+		
+		<input type="hidden" name="stage" value="3-11"/>
+		<div class="colour">
+		<h1>Step 3: Get ready for guests</h1>
+		<h2>Your local laws and taxes</h2>
+		<h4>Make sure you familiarise yourself with your local laws, as well as Zeta’s Nondiscrimination Policy.</h4>
+	
+		
+		Take a moment to review the local laws that apply to your listing. We want to make sure you have everything you need to get off to a great start.<br>
+		
+		
+		Most cities have rules covering homesharing, and the specific codes and ordinances can appear in many places (such as zoning, building, licensing or tax codes). In most places, you must register, get a permit, or obtain a license before you list your property or accept guests. You may also be responsible for collecting and remitting certain taxes. In some places, short-term rentals could be prohibited altogether.<br>
+		
+		
+		Since you are responsible for your own decision to list or book, you should get comfortable with the applicable rules before listing on Zeta. To get you started, we offer some helpful resources under “Your City Laws.”<br>
+		
+		By accepting our Terms of Service and listing your space, you certify that you will follow applicable laws and regulations.<br>
+		<br>
+	</div>
+		<div class="button_part">
+			<button name="navigation" type="submit" value="back" class="btn btn-success btn-large">Back</button>
+			<button name="navigation" type="submit" value="next" class="btn btn-success btn-large">Next</button>
+		</div>
+	</form>
+</div>
+</div>
+{% endblock %}

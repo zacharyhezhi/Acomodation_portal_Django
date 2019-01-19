@@ -1,0 +1,24 @@
+<!-- templates/review/visitor_review.html -->
+<h2>Reviews</h2>
+<h5 style="color:orange"><b>Rating: {{ rating|default:'-' }}</b></h5>
+
+<form action="{% url 'review:add-visitor-review' %}" method="post">
+	{% csrf_token %}
+	
+	<input type="hidden" name="listing_id" value="{{ listing.id }}">
+	
+	<b>Score:</b> <input type="number" name="score" min="0" max="100"/><br>
+	<textarea name="content" placeholder="enter text" cols="50" rows="3"></textarea><br>
+	
+	<button type="submit">post</button>
+</form><br>
+
+{% for review in reviews %}
+	<a href="{% url 'users:profile' user_id=review.visitor_id %}"><b>{{ review.visitor.first_name }}</b></a><br>
+	{{ review.content }}
+	{% if review.visitor_id == user.id %}<br>
+	<a href="{% url 'review:edit-visitor-review' review_id=review.id %}" style="color:red"><b>Edit</b></a> | 
+	<a href="{% url 'review:delete-visitor-review' review_id=review.id %}" style="color:red"><b>Delete</b></a>
+	{% endif %}
+	<br><br>
+{% endfor %}

@@ -1,0 +1,33 @@
+<!-- templates/request/edit-request.html -->
+{% extends 'base.html' %}
+
+{% block title %}Edit Request{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+{% block content %}
+<style>
+	.colour h1{color: #CECECE;}
+		.colour h2{color: #CECECE;}
+		.colour h3{color: #CECECE;}
+		.colour h4{color: #CECECE;}
+		.bg{
+			background-image: url('/static/images/bg-01.jpg');
+			width:100%;
+		}
+</style>
+
+<div class="bg">
+	<div class="colour">
+		<h2>Edit Request</h2>
+	</div>
+	
+	<form method="post">
+		{% csrf_token %}
+		
+		{{ form.as_p }}
+		
+		<button type="submit" class="btn btn-success btn-large">Update</button>
+	</form>
+</div>
+{% endblock %}

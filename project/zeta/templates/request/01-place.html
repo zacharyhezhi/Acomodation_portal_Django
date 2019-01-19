@@ -1,0 +1,85 @@
+<!-- templates/request/01-place.html -->
+{% extends 'base.html' %}
+
+{% block title %}Place a Request{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+{% block content %}
+<style>
+	.whole{
+		top: 25%;
+		left: 5%;
+		font-family: "Open Sans", sans-serif;
+		font-size: 15px !important;
+		margin-top: 150px;
+		/* text-align: left; */
+		padding-left:100px;
+		padding-top:5px;
+		color: #CECECE;
+		padding-bottom:200px;
+		display: inline-block;
+	}
+	
+	.button_part button{
+		border-radius: 20px;
+		height: 50px;
+		width: 100px;
+		background-color: #343a40;
+		color: #FFFFFF;
+		font-size: 20px;
+		margin-top: 40px;
+		cursor: pointer;
+	}
+	
+	.colour h1{color: #CECECE;}
+	
+	.colour h2{color: #CECECE;}
+	
+	.colour h3{color: #CECECE;}
+	
+	.colour h1{color: #CECECE;}
+	
+	.bg{
+		background-image: url('/static/images/bg-01.jpg');
+		width:100%;
+	}
+</style>
+
+<div class="bg">
+	<div class="whole">
+		<form action="{% url 'request:controller' %}" method="post">
+			{% csrf_token %}
+			
+			<input type="hidden" name="stage" value="01"/>
+			
+			<div class="colour">
+				<h1>Place a Request</h1>
+				
+				<h2>What kind of place are you after?</h2>
+				<h3>Now choose a property type<br></h3>
+				<select name="property_type">
+					<option value="Apartment">Apartment</option>
+					<option value="Condominium">Condominium</option>
+					<option value="House">House</option>
+					<option value="Villa">Villa</option>
+					<option value="Other">Other</option>
+				</select><br>
+				<br>
+				
+				<h3>Preferred room?</h3>
+				<select name="room_type">
+					<option value="Entire home/apt">Entire home/apt</option>
+					<option value="Private room">Private room</option>
+					<option value="Shared room">Shared room</option>
+				</select><br>
+			</div>
+			
+			<div class= "button_part">
+				<button name="navigation" type="submit" value="back" class="btn btn-success btn-large">Back</button>
+				<button name="navigation" type="submit" value="next" class="btn btn-success btn-large">Next</button>
+			</div>
+		</form>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,88 @@
+<!-- templates/advertising/step1-01-place.html -->
+{% extends 'base.html' %}
+
+{% block title %}Step 1: Start with the basics{% endblock %}
+
+{% block navigation %}{% include 'navigation.html' %}{% endblock %}
+
+{% block content %}
+<style>
+	.whole{
+		top: 5%;
+		left: 5%;
+		font-family: "Open Sans", sans-serif;
+		font-size: 20px !important;
+		margin-top: 150px;
+		/* text-align: left; */
+		padding-left:100px;
+		padding-top:5px;
+		color: #CECECE;
+		padding-bottom:500px;
+		display: inline-block;
+	}
+	.colour h1{color: #CECECE;}
+	.colour h2{color: #CECECE;}
+	.bg{
+		background-image: url('/static/images/bg-01.jpg');
+		width:100%;
+	}
+	.button_part button{
+		border-radius: 20px;
+		height: 50px;
+		width: 100px;
+		background-color: #343a40;
+		color: #FFFFFF;
+		font-size: 20px;
+		margin-top: 40px;
+		cursor: pointer;
+	}
+</style>
+
+<div class="bg">
+<div class="whole">
+	<div style="margin-top:10%; text-align:center;">
+		<div class="colour">
+			<h1>Step 1: Start with the basics</h1>
+		</div>
+	</div>
+	<form action="{% url 'advertising:controller' %}" method="post">
+		
+		{% csrf_token %}
+		<input type="hidden" name="stage" value="1-01"/>
+		<div class="colour">
+			<h2>What kind of place are you listing?</h2>
+		</div>
+		Now choose a property type<br>
+		<select name="property_type">
+			<option value="Apartment">Apartment</option>
+			<option value="Condominium">Condominium</option>
+			<option value="House">House</option>
+			<option value="Villa">Villa</option>
+			<option value="Other">Other</option>
+		</select><br>
+		<br>
+		
+		How big is it? (optional)<br>
+		<input type="text" name="square_feet" value="{{ request.session.square_feet }}"/> square feet<br>
+		<br>
+		
+		What will guests have?<br>
+		<select name="room_type">
+			<option value="Entire home/apt">Entire home</option>
+			<option value="Private room">Private room</option>
+			<option value="Shared room">Shared room</option>
+		</select><br>
+		<br>
+		
+		Is this set up as a dedicated guest space?<br>
+		<input type="radio" name="is_dedicated" value="yes"/>Yes, it’s primarily set up for guests<br>
+		<input type="radio" name="is_dedicated" value="no" checked/>No, I keep my personal belongings here<br>
+		
+		<div class="button_part">
+			<button class="btn btn-success" name="navigation" type="submit" value="back">Back</button>
+			<button class="btn btn-success" name="navigation" type="submit" value="next">Next</button>
+		</div>
+	</form>
+</div>
+</div>
+{% endblock %}
